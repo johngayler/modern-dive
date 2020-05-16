@@ -58,3 +58,17 @@ evals_ch6 %>%
        colour = "Gender")
 
 # 6.1.2. Interaction Model
+
+# We're now going to quantify the relationship' between our outcome and two explanatory variables using an interaction model. 
+
+# Fit regression model
+score_model_interaction <- lm(score ~ age * gender, data = evals_ch6)
+
+# Get regression table
+get_regression_table(score_model_interaction)
+
+# The out put from this table nis telling us the following; firstly, 'female' is our baseline for comparison group as alphabetically it comes before 'male' (this is default in R but the levels in the factor can be reordered using forcats). The intercept for females is 4.88 (score) with an associated decrease in score of -0.018 for each additional unit increase in age. The outcome variable score is offset -0.446 for male instructors (i.e. 4.88 - 0.446 = 4.434) with an associated decrease of -0.004 units (-0.018 + 0.014) for each unit increase in age. 
+
+# This model suggests that instructor score for females on average has a greater associated decrease for each unit increase of age than for male instructors. 
+
+# INteraction models are so called as the associated effect of one vairable depends on the value of another vairable (e.g. male/female), that is to say, the two variables are 'interacting' with each other. In this model the associated effect of the variable age depends on the value of the other vairable gender. The difference inslopes for age of male instructors relative to femal instructors shows this.                                                        
