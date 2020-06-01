@@ -71,4 +71,30 @@ get_regression_table(score_model_interaction)
 
 # This model suggests that instructor score for females on average has a greater associated decrease for each unit increase of age than for male instructors. 
 
-# INteraction models are so called as the associated effect of one vairable depends on the value of another vairable (e.g. male/female), that is to say, the two variables are 'interacting' with each other. In this model the associated effect of the variable age depends on the value of the other vairable gender. The difference inslopes for age of male instructors relative to femal instructors shows this.                                                        
+# INteraction models are so called as the associated effect of one vairable depends on the value of another vairable (e.g. male/female), that is to say, the two variables are 'interacting' with each other. In this model the associated effect of the variable age depends on the value of the other vairable gender. The difference inslopes for age of male instructors relative to femal instructors shows this.                                                        # 
+
+# 6.1.3 Parallel slopes model
+
+# Another type of model that we can use s k nown as a parallel slopes model. Unlike interaction models where the regression lines can have different intercepts and different slopes, parallel slopes models still allow for different intercepts but force all lines to have the same slope. The resulting regressionl ines are therefore parallel. 
+
+# Visualise a parallel slopes model. 
+
+evals_ch6 %>% 
+  ggplot(aes(x = age, y = score, colour = gender)) +  
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) +
+  labs(title = "Parallel slopes model", 
+       x = "Age", 
+       y = "Teaching Score", 
+       colour = "Gender") 
+
+# ALthough male and female instructors have different intercepts, the slopes are parallel which tells us that the associated penality for each unit increase in age is the same regardless of gender. With the line for females being lower than that for males, we can see that the irrespective of age, female instructors tend to receive lower teaching scores than male instructors.
+
+# To obtain the precise numerical values we'll fit a parallel slopes model to the data. 
+
+# Fit model 
+
+score_model_parallel_slopes <- lm(score ~ age + gender, data = evals_ch6)
+
+# Get regression table 
+get_regression_table(score_model_parallel_slopes)
